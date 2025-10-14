@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wedding Seating Search</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-pink: #f7c6d9;       /* 主玫瑰粉 */
+      --light-pink: #fff0f6;      /* 淡粉背景 */
+      --soft-pink: #ffeaf1;       /* 柔粉 */
+      --accent: #e6a1c3;          /* 深一点粉，按钮和边框 */
+      --text-dark: #4a3b47;       /* 深棕紫文字 */
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-pink);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--main-pink);
+      color: white;
+      width: 100%;
+      box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    .header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 30px 20px;
+      flex: 1;
+    }
+
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 14px 15px 14px 45px;
+      border-radius: 12px;
+      border: 2px solid var(--main-pink);
+      font-size: 15px;
+      box-shadow: 0 3px 8px var(--shadow);
+      transition: 0.3s;
+    }
+
+    #search:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(230, 161, 195, 0.4);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+
+    .wedding-button {
+      padding: 12px 24px;
+      border-radius: 25px;
+      border: 2px solid var(--accent);
+      background: var(--soft-pink);
+      color: var(--text-dark);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 3px 8px var(--shadow);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .wedding-button:hover {
+      background: var(--main-pink);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .result {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed var(--main-pink);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #f5d6e1;
+      transition: background 0.2s;
+    }
+
+    .result-item:hover {
+      background: var(--soft-pink);
+    }
+
+    .table-number,
+    .no-table {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 48px;
+      padding: 0 8px;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap;
+      border: 2px solid #d1a1b9;
+      background: radial-gradient(circle at top left, #fff, var(--main-pink));
+      color: var(--text-dark);
+    }
+
+    .no-table {
+      background: #eee;
+      border-color: #ccc;
+      color: #aaa;
+    }
+
+    .floral-divider {
+      text-align: center;
+      font-size: 20px;
+      margin: 30px 0;
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background: var(--soft-pink);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 36px; }
+      .header p { font-size: 14px; }
+      .button-container { flex-direction: column; }
+      .wedding-button { width: 100%; max-width: 280px; }
+      .result-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Our Wedding</h1>
+    <p>Find your seat and celebrate love with us</p>
+  </div>
+
+  <div class="container">
+    <div class="search-container">
+      <i class="search-icon fas fa-search"></i>
+      <input id="search" placeholder="Enter your name..." autofocus />
+    </div>
+
+    <div class="button-container">
+      <a href="seating.html" class="wedding-button">View Seating Chart 💕</a>
+      <button id="clearButton" class="wedding-button">Clear Search</button>
+    </div>
+
+    <div id="result" class="result">
+      <div class="result-header">
+        <div><i class="fas fa-users"></i> Guest List</div>
+        <div>Total: <span id="totalGuests">0</span> guests</div>
+      </div>
+      <div id="guestList"></div>
+    </div>
+
+    <div class="floral-divider">
+      ❀ ✿ ❀
+    </div>
+
+    <table id="guestTable" style="display:none;">
+      <tbody>
+        <tr><td class="name">DR. &amp; MRS. ALEX HOR</td><td class="table">28</td></tr>
+        <tr><td class="name">MS. VANIELLE KEE</td><td class="table">39</td></tr>
+        <tr><td class="name">DR. NG SZE HOW &amp; DR. ONG CHIEW PING</td><td class="table">28</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>Thank you for being part of our special day 💕</p>
+  </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search");
+  const guestTable = document.getElementById("guestTable");
+  const guestList = document.getElementById("guestList");
+  const totalGuests = document.getElementById("totalGuests");
+  const clearButton = document.getElementById("clearButton");
+
+  const rows = guestTable.querySelectorAll("tbody tr");
+  const guests = Array.from(rows).map(row => ({
+    name: row.querySelector(".name").textContent.trim(),
+    table: row.querySelector(".table").textContent.trim()
+  }));
+
+  function renderList(data) {
+    guestList.innerHTML = "";
+    totalGuests.textContent = data.length;
+
+    data.forEach(g => {
+      const card = document.createElement("div");
+      card.className = "result-item";
+
+      const nameDiv = document.createElement("div");
+      nameDiv.textContent = g.name;
+
+      const tableCircle = document.createElement("div");
+      if (g.table) {
+        tableCircle.className = "table-number";
+        tableCircle.textContent = g.table;
+      } else {
+        tableCircle.className = "no-table";
+        tableCircle.textContent = "TBA";
+      }
+
+      card.appendChild(nameDiv);
+      card.appendChild(tableCircle);
+      guestList.appendChild(card);
+    });
+  }
+
+  function doSearch() {
+    const q = searchInput.value.trim().toLowerCase();
+    const filtered = guests.filter(g => g.name.toLowerCase().includes(q));
+    renderList(filtered);
+  }
+
+  renderList(guests);
+  searchInput.addEventListener("input", doSearch);
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    renderList(guests);
+  });
+});
+</script>
+</body>
+</html>
