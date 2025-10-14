@@ -92,20 +92,24 @@
     .button-container {
       display: flex;
       justify-content: center;
+align-items: center;
       gap: 15px;
       margin: 25px 0;
       flex-wrap: wrap;
     }
 
     .wedding-button {
-      padding: 12px 24px;
-      border-radius: 25px;
+ display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      border-radius: 50px;
       border: 2px solid var(--accent);
       background: var(--soft-pink);
       color: var(--text-dark);
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 3px 8px var(--shadow);
+      box-shadow: 0 4px 10px var(--shadow);
       transition: all 0.3s ease;
       text-decoration: none;
     }
@@ -190,15 +194,15 @@
       .header h1 { font-size: 36px; }
       .header p { font-size: 14px; }
       .button-container { flex-direction: column; }
-      .wedding-button { width: 100%; max-width: 280px; }
+      .wedding-button { width: 100%; max-width: 300px; }
       .result-header { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>Our Wedding</h1>
-    <p>Find your seat and celebrate love with us</p>
+    <h1>Find Your Seat</h1>
+    <p>Search for your seat by name, and enjoy the celebration</p>
   </div>
 
   <div class="container">
