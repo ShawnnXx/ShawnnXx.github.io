@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seating Chart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #ffe6e6;       /* 主粉 */
+      --secondary-color: #ffe6ec;     /* 淡粉背景 */
+      --accent-color: #ffd4d4;        /* 渐层粉 */
+      --light-color: #fff5f7;         /* 更淡粉 */
+      --text-color: #5a4c4c;          /* 柔棕色文字 */
+      --shadow-color: rgba(90, 76, 76, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--light-color) 0%, var(--secondary-color) 100%);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      width: 100%;
+      background: linear-gradient(135deg, #f2dada, #fce6e6);
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .header h1 {
+      font-size: 30px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      color: var(--text-color);
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      padding: 30px 20px;
+      flex: 1;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .wedding-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-color);
+      background: linear-gradient(135deg, #ffdbe1, #ffd4d4);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .wedding-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(90, 76, 76, 0.2);
+    }
+
+    .wedding-button i { margin-right: 8px; }
+
+    /* Return to Search 特殊样式 */
+    .back-button {
+      border: 2px solid #857b73;  /* 柔和棕灰色边框 */
+    }
+
+    .img-wrap { margin-top: 18px; }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px var(--shadow-color);
+    }
+
+    .help {
+      font-size: 14px;
+      color: var(--text-color);
+      opacity: 0.9;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .help a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .help a:hover { text-decoration: underline; }
+
+    .footer {
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 24px; }
+      .header p { font-size: 14px; }
+      .button-container { flex-direction: column; }
+      .wedding-button { width: 100%; max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Wedding Seating Chart</h1>
+    <p>Tap the image to open full size. Use the button below to return to the search page.</p>
+  </div>
+
+  <div class="container">
+    <div class="button-container">
+      <button id="backBtn" class="wedding-button back-button" aria-label="Return to search">
+        <i class="fas fa-arrow-left"></i> Return to Search
+      </button>
+      <a href="https://ShawnnXx.github.io/seating_chart.png" 
+         target="_blank" rel="noopener" 
+         class="wedding-button">
+        <i class="fas fa-expand"></i> Open Full Image
+      </a>
+    </div>
+
+    <div class="img-wrap">
+      <a href="seating_chart.png" target="_blank" rel="noopener">
+        <img src="https://ShawnnXx.github.io/seating_chart.png" alt="Seating Chart">
+      </a>
+    </div>
+
+    <div class="help">
+      If the Return button doesn't work (very rare), click <a href="index.html">this link</a> to go back.
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Thank you for joining our special day</p>
+  </div>
+
+  <script>
+    document.getElementById('backBtn').addEventListener('click', function () {
+      try {
+        if (document.referrer && document.referrer.includes(location.hostname)) {
+          history.back();
+        } else {
+          location.href = 'index.html';
+        }
+      } catch (e) {
+        location.href = 'index.html';
+      }
+    });
+  </script>
+</body>
+</html>
